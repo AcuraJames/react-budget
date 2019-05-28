@@ -1,11 +1,13 @@
 import React from 'react'
-import AddTransaction from './AddTransaction'
 
-const Transaction = () => {
-
-    let transactions = []
-
-    // return (
-
-    // )
+const Transaction = props => {
+    return (
+       <div>
+            <span>{props.trx.amount}</span>
+                        &nbsp;
+            <span>{props.trx.description}</span>
+       </div>
+    )
 }
+
+export default Transaction

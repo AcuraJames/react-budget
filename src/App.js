@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 import AddTransaction from './AddTransaction'
 import TransactionList from './TransactionList'
 
+import './App.css';
+
+const dataSet = [
+  {amount: 0, description: 'Description'},
+]
+
 class App extends Component {
-  state = {
-    amount: 0,
-    description: 'Description'
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.state.data = dataSet
   }
 
-  updateAmountData = (value) => {
-    this.setState({amount: value})
+  componentWillMount() {
+    this.setState({data: dataSet})
   }
-
-  updateDescriptionData = (value) => {
-    this.setState({description: value})
+  
+  add = (amount, description) => {
+    dataSet.push({amount: amount, description: description})
+    this.setState({data: dataSet})
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Daily Cost</h1>
         </header>
         <main>
-          <AddTransaction 
-            updateAmountData={this.updateAmountData}
-            updateDescriptionData={this.updateDescriptionData}
-          />
-          <TransactionList 
-            amount={this.state.amount}
-            description={this.state.description}
-          />
+          <AddTransaction onAdd={this.add} />
+          <TransactionList transactions={this.state.data} />
         </main>
       </div>
     )

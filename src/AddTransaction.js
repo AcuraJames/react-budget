@@ -1,27 +1,46 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './AddTransaction.css'
 
-const AddTransaction = (props) => {
+class AddTransaction extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            amount: 10,
+            description: 'description'
+        }
+    }
 
-    const [amount, setAmount] = useState(0)
-    const [description, setDescription] = useState('Description')
+    handleChangeAmount = (e) => {
+        this.setState({amount: e.target.value})
+    }
 
-    return (
-        <div className="add-transaction">
-            <input 
-                type="number"
-                className="amount" 
-                value={amount}
-                onChange={event => setAmount(props.updateAmountData(event.target.value))}
-            />
-            <input 
-                type="text" 
-                className="decription"         
-                value={description}
-                onChange={event => setDescription(props.updateDescriptionData(event.target.value))}
-            />
-        </div>
-    )
+    handleChangeDescription = (e) => {
+        this.setState({description: e.target.value})
+    }
+
+    add = () => {
+        this.props.onAdd(this.state.amount, this.state.description)
+    }
+
+    render() {
+        return (
+            <div className="add-transaction">
+                <input 
+                    type="number"
+                    className="amount" 
+                    value={this.state.amount}
+                    onChange={this.handleChangeAmount}
+                />
+                <input 
+                    type="text" 
+                    className="decription"         
+                    value={this.state.description}
+                    onChange={this.handleChangeDescription}
+                />
+                <button onClick={this.add}>Add</button>
+            </div>
+        )
+    }
 }
 
 export default AddTransaction

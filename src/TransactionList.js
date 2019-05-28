@@ -1,11 +1,23 @@
 import React from 'react'
+import Transaction from './Transaction'
 
-const TransactionList = (props) => {
+const TransactionList = props => {
+
+    const style = {
+        width: '1000px',
+        height: '100px'
+    }
+
+    const trxList = props.transactions.map((trx, idx) => (
+        <li key={idx}><Transaction style={style} trx={trx} /></li>
+    ))
+
     return (
         <div className="transaction-list">
             <h2>Transations</h2>
-            <span className="amount"> {props.amount} </span>
-            <span className="description"> {props.description} </span>
+            <ul>
+                {trxList}
+            </ul>
         </div>
     )
 }
